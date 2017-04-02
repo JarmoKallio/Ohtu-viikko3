@@ -27,8 +27,8 @@ public class App {
         String name = str[0];
         String pwd = str[1];
 
-        if (containsWeirdMarks(name) || properLength(name, 3) || properLength(pwd, 8) ||
-                containsSpecialMark(pwd)) {
+        if (containsWeirdMarks(name) || properLength(name, 3) || properLength(pwd, 8)
+                ) {
             return false;
         }
 
