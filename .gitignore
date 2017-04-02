@@ -1,2 +1,4 @@
 build
 .gradle
+/HelloCucumber/.nb-gradle/
+/LoginCucumber/.nb-gradle/

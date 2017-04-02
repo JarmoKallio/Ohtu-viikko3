@@ -31,3 +31,27 @@ dependencies {
 */
 
 apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'Main'
+
+apply plugin: 'checkstyle'
+
+run {
+    standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+//testit..
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+

@@ -23,17 +23,68 @@ public class App {
         return userPwd;
     }
 
+    private boolean newNameAndPwdValid(String[] str) {
+        String name = str[0];
+        String pwd = str[1];
+
+        if (containsWeirdMarks(name) || properLength(name, 3) || properLength(pwd, 8) ||
+                containsSpecialMark(pwd)) {
+            return false;
+        }
+
+        return true;
+    }
+    
+//    private boolean nameNotInUse(String name){
+//        if(auth.)
+//    }
+    
+    private boolean properLength(String str, int len) {
+        if (str.length() >= len) {
+            return true;
+        }
+        return false;
+    }
+
+//    private boolean containsSpecialMark(String str) {
+//        //tarkistus että str joukossa erikoismerkki
+//        String accepted = "qazwsxedcrfvtgbyhnujmikolp";
+//        int length = str.length();
+//
+//        for (int i = 0; i < length; i++) {
+//            if (!accepted.contains("" + str.charAt(i))) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+
+    private boolean containsWeirdMarks(String str) {
+        //tarkistus että str joukossa P(a-z)
+        String accepted = "qazwsxedcrfvtgbyhnujmikolp";
+        int length = str.length();
+
+        for (int i = 0; i < length; i++) {
+            if (!accepted.contains("" + str.charAt(i))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void run() {
         while (true) {
             String command = io.readLine("komento (new tai login):");
-
             if (command.isEmpty()) {
                 break;
             }
 
             if (command.equals("new")) {
                 String[] usernameAndPasword = ask();
-                if (auth.createUser(usernameAndPasword[0], usernameAndPasword[1])) {
+                if (newNameAndPwdValid(usernameAndPasword) && auth.createUser(usernameAndPasword[0], usernameAndPasword[1])) {
+
                     io.print("new user registered");
                 } else {
                     io.print("new user not registered");
@@ -57,7 +108,7 @@ public class App {
         AuthenticationService auth = new AuthenticationService(dao);
         new App(io, auth).run();
     }
-    
+
     // testejä debugatessa saattaa olla hyödyllistä testata ohjelman ajamista
     // samoin kuin testi tekee, eli injektoimalla käyttäjän syötteen StubIO:n avulla
     //

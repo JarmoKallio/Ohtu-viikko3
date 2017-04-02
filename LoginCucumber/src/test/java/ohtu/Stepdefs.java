@@ -36,4 +36,5 @@ public class Stepdefs {
     public void system_will_respond_with(String expectedOutput) throws Throwable {
         assertTrue(io.getPrints().contains(expectedOutput));
     }
+
 }
